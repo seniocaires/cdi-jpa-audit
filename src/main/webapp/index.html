@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sites</title>
+<script>
+
+	var tokenRandom = Math.random();
+	function Get(url) {
+		var request = new XMLHttpRequest();
+		request.open("GET", url, false);
+		request.setRequestHeader("Authorization", tokenRandom);
+		request.send(null);
+		return request.responseText;
+	}
+</script>
+</head>
+
+<body>
+
+	<div id="lista-sites">
+
+	</div>
+	<script>
+		setInterval(
+				function() {
+					var listaSites = "";
+					var sites = JSON.parse(Get('v1/sites'));
+					for (var i = 0; i < sites.length; i++) {
+						listaSites += "<p> " + sites[i].nomeAlterado + " : Usuário alteração -> " + sites[i].usuarioAlteracao + "</p>";
+					}
+					document.getElementById('lista-sites').innerHTML = listaSites;
+				}, 1000);
+
+		setInterval(
+				function() {
+					Get('v1/sites/change');
+				}, Math.floor(Math.random() * 5000) + 1000);
+	</script>
+</body>
+</html>
