@@ -18,16 +18,20 @@
 
 <body>
 
+	<div id="meu-token">
+	</div>
+
 	<div id="lista-sites">
 
 	</div>
 	<script>
+		document.getElementById('meu-token').innerHTML = "<p><b>MEU TOKEN:</b> " + tokenRandom + " </p>";
 		setInterval(
 				function() {
 					var listaSites = "";
 					var sites = JSON.parse(Get('v1/sites'));
 					for (var i = 0; i < sites.length; i++) {
-						listaSites += "<p> " + sites[i].nomeAlterado + " : Usuário alteração -> " + sites[i].usuarioAlteracao + "</p>";
+						listaSites += "<p> <b> Nome do site:</b> " + sites[i].nomeAlterado + " <br/> <b>Token do usuário que realizou a última alteração:</b> " + sites[i].usuarioAlteracao + "</p>";
 					}
 					document.getElementById('lista-sites').innerHTML = listaSites;
 				}, 1000);

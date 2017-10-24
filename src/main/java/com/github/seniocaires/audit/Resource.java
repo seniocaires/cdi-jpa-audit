@@ -22,7 +22,7 @@ public class Resource {
   @Path("/change")
   public Response change() {
     for (Site site : service.buscarTodos()) {
-      site.setNome(String.valueOf(1 + (int) (Math.random() * 100)));
+      site.setNomeAlterado(site.getNome() + String.valueOf(1 + (int) (Math.random() * 100)));
       service.salvar(site);
     }
     return Response.ok().build();
